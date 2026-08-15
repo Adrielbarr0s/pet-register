@@ -21,6 +21,7 @@ db.exec(`
     nome TEXT NOT NULL,
     especie TEXT NOT NULL,
     raca TEXT DEFAULT 'SRD',
+    data_nascimento DATE NULL,
     idade INTEGER,
     peso REAL,
     tutor_nome TEXT NOT NULL,

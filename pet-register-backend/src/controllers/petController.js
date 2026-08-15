@@ -56,8 +56,8 @@ export const petController = {
     const data = petCreateSchema.parse(req.body);
 
     const stmt = db.prepare(`
-      INSERT INTO pets (user_id, nome, especie, raca, idade, peso, tutor_nome, tutor_contato)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO pets (user_id, nome, especie, raca, data_nascimento, idade, peso, tutor_nome, tutor_contato)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
@@ -65,6 +65,7 @@ export const petController = {
       data.nome,
       data.especie,
       data.raca,
+      data.data_nascimento ?? null,
       data.idade ?? null,
       data.peso ?? null,
       data.tutor_nome,

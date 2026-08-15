@@ -37,6 +37,7 @@ test('Pets API Integration Tests', async (t) => {
       nome: 'Bolinha',
       especie: 'Cachorro',
       raca: 'Poodle',
+      data_nascimento: '2023-01-15',
       idade: 2,
       peso: 5.5,
       tutor_nome: 'João Silva',
@@ -53,6 +54,7 @@ test('Pets API Integration Tests', async (t) => {
     const data = await res.json();
     assert.ok(data.id, 'Deve retornar o ID do pet criado');
     assert.strictEqual(data.nome, 'Bolinha', 'Nome deve ser Bolinha');
+    assert.strictEqual(data.data_nascimento, '2023-01-15', 'Deve retornar a data de nascimento');
     
     createdPetId = data.id; // Guarda para usar nos próximos testes
   });

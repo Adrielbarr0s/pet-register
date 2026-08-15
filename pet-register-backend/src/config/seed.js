@@ -18,16 +18,16 @@ const userResult = insertUser.run('demo_google_id_123', 'demo@example.com', 'Usu
 const demoUserId = Number(userResult.lastInsertRowid);
 
 const pets = [
-  [demoUserId, 'Rex', 'Cachorro', 'Pastor Alemão', 3, 32.5, 'Adriel Barros', '(89) 99999-1111'],
-  [demoUserId, 'Luna', 'Gato', 'Siamês', 2, 4.2, 'Karolaine Alencar', '(89) 99999-2222'],
-  [demoUserId, 'Thor', 'Cachorro', 'Husky Siberiano', 1, 23.0, 'Carlos Eduardo', '(89) 99999-3333'],
-  [demoUserId, 'Pipoca', 'Ave', 'Calopsita', 1, 0.1, 'Mariana Costa', '(89) 99999-4444'],
-  [demoUserId, 'Mia', 'Gato', 'Persa', 4, 3.8, 'Lucas Mendes', '(89) 99999-5555']
+  [demoUserId, 'Rex', 'Cachorro', 'Pastor Alemão', '2023-05-15', 3, 32.5, 'Adriel Barros', '(89) 99999-1111'],
+  [demoUserId, 'Luna', 'Gato', 'Siamês', '2024-03-15', 2, 4.2, 'Karolaine Alencar', '(89) 99999-2222'],
+  [demoUserId, 'Thor', 'Cachorro', 'Husky Siberiano', '2025-05-15', 1, 23.0, 'Carlos Eduardo', '(89) 99999-3333'],
+  [demoUserId, 'Pipoca', 'Ave', 'Calopsita', '2026-03-15', 1, 0.1, 'Mariana Costa', '(89) 99999-4444'],
+  [demoUserId, 'Mia', 'Gato', 'Persa', '2026-08-01', null, 0.8, 'Lucas Mendes', '(89) 99999-5555']
 ];
 
 const insertPet = db.prepare(`
-  INSERT INTO pets (user_id, nome, especie, raca, idade, peso, tutor_nome, tutor_contato)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  INSERT INTO pets (user_id, nome, especie, raca, data_nascimento, idade, peso, tutor_nome, tutor_contato)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 `);
 
 // Armazena os IDs reais retornados na inserção
