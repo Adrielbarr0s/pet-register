@@ -1,5 +1,8 @@
-const API_URL = 'http://localhost:3000/api/pets';
-const AUTH_API_URL = 'http://localhost:3000/api/auth';
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const BASE_URL = IS_LOCAL ? 'http://localhost:3000' : 'https://pet-register-backend.onrender.com';
+const AUTH_API_URL = `${BASE_URL}/api/auth`;
+const API_URL = `${BASE_URL}/api/pets`;
+
 let currentPage = 1;
 const limit = 6;
 
