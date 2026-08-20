@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     @media print {
       body * {
@@ -84,31 +83,7 @@
           <button type="submit" class="w-full mt-2 bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-500/20">Criar Minha Conta</button>
         </form>
 
-        <div class="flex items-center gap-3 my-6">
-          <div class="h-px bg-slate-800 flex-1"></div>
-          <span class="text-xs font-medium text-slate-500">OU CONTINUE COM</span>
-          <div class="h-px bg-slate-800 flex-1"></div>
-        </div>
-
-        <div class="flex flex-col gap-3">
-          <div class="flex justify-center">
-            <div id="g_id_onload"
-               data-client_id="COLOQUE_SEU_CLIENT_ID_AQUI"
-               data-context="signin"
-               data-ux_mode="popup"
-               data-callback="handleGoogleLogin"
-               data-auto_prompt="false">
-            </div>
-            <div class="g_id_signin"
-               data-type="standard"
-               data-shape="rectangular"
-               data-theme="outline"
-               data-text="signin_with"
-               data-size="large"
-               data-logo_alignment="center">
-            </div>
-          </div>
-          
+        <div class="flex flex-col gap-3 mt-6">
           <button onclick="demoLogin()" class="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-all border border-slate-700">
             <i class="fa-solid fa-bolt text-amber-400"></i> Acesso Rápido / Modo Demo
           </button>

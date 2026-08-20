@@ -19,25 +19,6 @@ async function apiFetch(url, options = {}) {
   return res;
 }
 
-window.handleGoogleLogin = async function (response) {
-  try {
-    const res = await fetch(`${AUTH_API_URL}/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ credential: response.credential })
-    });
-
-    if (!res.ok) {
-      showToast('Falha no login com Google', true);
-      return;
-    }
-
-    const data = await res.json();
-    salvarSessao(data.token, data.user);
-  } catch (error) {
-    showToast('Erro ao conectar com o servidor', true);
-  }
-};
 
 window.switchAuthTab = function (tab) {
   const loginTab = document.getElementById('tab-login');
