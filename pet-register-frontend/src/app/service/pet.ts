@@ -15,7 +15,7 @@ export interface PetInterface {
   providedIn: 'root'
 })
 export class PetService {
-  private apiUrl = 'http://localhost:3000/api/pets';
+  private apiUrl = 'https://pet-register-api.onrender.com/api/pets';
 
   constructor(private http: HttpClient) {}
 

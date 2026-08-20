@@ -12,8 +12,11 @@ dotenv.config();
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
+
+app.get('/', (req, res) => res.status(200).json({ status: 'OK', message: 'API is running' }));
+app.get('/api', (req, res) => res.status(200).json({ status: 'OK', message: 'API is running' }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/pets', authMiddleware, petRoutes);
