@@ -9,7 +9,7 @@ async function apiFetch(url, options = {}) {
   const token = localStorage.getItem('pet_register_jwt');
   if (!options.headers) options.headers = {};
   if (token) options.headers['Authorization'] = `Bearer ${token}`;
-  
+
   const res = await fetch(url, options);
   if (res.status === 401) {
     showToast('Sessão expirada. Faça login novamente.', true);
@@ -19,7 +19,7 @@ async function apiFetch(url, options = {}) {
   return res;
 }
 
-window.handleGoogleLogin = async function(response) {
+window.handleGoogleLogin = async function (response) {
   try {
     const res = await fetch(`${AUTH_API_URL}/google`, {
       method: 'POST',
@@ -39,7 +39,7 @@ window.handleGoogleLogin = async function(response) {
   }
 };
 
-window.switchAuthTab = function(tab) {
+window.switchAuthTab = function (tab) {
   const loginTab = document.getElementById('tab-login');
   const registerTab = document.getElementById('tab-register');
   const formLogin = document.getElementById('form-login');
@@ -99,18 +99,18 @@ document.getElementById('form-register')?.addEventListener('submit', async (e) =
   }
 });
 
-window.demoLogin = async function() {
+window.demoLogin = async function () {
   try {
-    const res = await fetch(`${AUTH_API_URL}/demo`, { 
+    const res = await fetch(`${AUTH_API_URL}/demo`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Falha no Demo');
-    
+
     localStorage.setItem('pet_register_jwt', data.token);
     localStorage.setItem('pet_register_user', JSON.stringify(data.user));
-    
+
     showToast('Bem-vindo ao Modo Demonstração!');
     setTimeout(() => {
       window.location.reload();
@@ -126,7 +126,7 @@ function salvarSessao(token, user) {
   checkAuth();
 }
 
-window.logout = function() {
+window.logout = function () {
   localStorage.removeItem('pet_register_jwt');
   localStorage.removeItem('pet_register_user');
   checkAuth();
@@ -135,7 +135,7 @@ window.logout = function() {
 function checkAuth() {
   const token = localStorage.getItem('pet_register_jwt');
   const userStr = localStorage.getItem('pet_register_user');
-  
+
   const overlay = document.getElementById('login-overlay');
   const mainApp = document.getElementById('main-app');
   const userProfile = document.getElementById('user-profile');
@@ -146,14 +146,14 @@ function checkAuth() {
     const user = JSON.parse(userStr);
     overlay.classList.add('hidden');
     mainApp.classList.remove('hidden');
-    
+
     userProfile.classList.remove('hidden');
     userProfile.classList.add('flex');
     userName.textContent = user.nome;
     if (user.avatar) {
       userAvatar.src = user.avatar;
     }
-    
+
     carregarPets(1);
   } else {
     overlay.classList.remove('hidden');
@@ -233,15 +233,15 @@ function calcularIdadeAmigavel(dataNascimento, idadeAnos) {
     // Parse the date components specifically to avoid timezone issues with 'YYYY-MM-DD'
     const partes = dataNascimento.split('-');
     const nasc = new Date(partes[0], partes[1] - 1, partes[2]);
-    
+
     let anos = hoje.getFullYear() - nasc.getFullYear();
     let meses = hoje.getMonth() - nasc.getMonth();
-    
+
     if (meses < 0 || (meses === 0 && hoje.getDate() < nasc.getDate())) {
       anos--;
       meses += 12;
     }
-    
+
     // adjust if days are negative
     if (hoje.getDate() < nasc.getDate()) {
       meses--;
@@ -268,7 +268,7 @@ function renderizarGrid(pets) {
   gridPets.innerHTML = pets.map(pet => {
     const idadeAmigavel = calcularIdadeAmigavel(pet.data_nascimento, pet.idade);
     const dataNascFormatada = pet.data_nascimento ? pet.data_nascimento.split('-').reverse().join('/') : '';
-    
+
     return `
     <div class="bg-slate-900/70 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all flex flex-col justify-between shadow-xl">
       <div>
@@ -369,7 +369,7 @@ formPet.addEventListener('submit', async (e) => {
   }
 });
 
-window.editarPet = async function(id) {
+window.editarPet = async function (id) {
   try {
     const res = await apiFetch(`${API_URL}/${id}`);
     const pet = await res.json();
@@ -392,7 +392,7 @@ window.editarPet = async function(id) {
   }
 };
 
-window.deletarPet = async function(id) {
+window.deletarPet = async function (id) {
   const result = await Swal.fire({
     title: 'Remover Pet?',
     text: 'Esta ação removerá o pet e todo seu histórico vacinal!',
@@ -419,7 +419,7 @@ window.deletarPet = async function(id) {
   }
 };
 
-window.abrirModalVacinas = async function(id, nome) {
+window.abrirModalVacinas = async function (id, nome) {
   vacinaPetId.value = id;
   vacinasPetNome.innerHTML = `<i class="fa-solid fa-syringe text-emerald-400"></i> Cartão de Vacinas - ${nome}`;
   modalVacinas.classList.remove('hidden');
@@ -481,7 +481,7 @@ formVacina.addEventListener('submit', async (e) => {
   }
 });
 
-window.deletarVacina = async function(id, petId) {
+window.deletarVacina = async function (id, petId) {
   try {
     await apiFetch(`${API_URL}/vacinas/${id}`, { method: 'DELETE' });
     showToast('Vacina removida!');
@@ -529,7 +529,7 @@ function atualizarPreviewIdade() {
 document.getElementById('pet-data-nascimento')?.addEventListener('input', atualizarPreviewIdade);
 
 // Função para gerar PDF da carteirinha
-window.gerarCarteirinhaPDF = async function() {
+window.gerarCarteirinhaPDF = async function () {
   const petId = vacinaPetId.value;
   if (!petId) return;
 
@@ -563,7 +563,7 @@ window.gerarCarteirinhaPDF = async function() {
     } else {
       tbody.innerHTML = vacinas.map((v, index) => {
         const bgClass = index % 2 === 0 ? 'bg-white' : 'bg-slate-50';
-        
+
         let status = 'Em dia';
         if (v.proxima_dose) {
           const hoje = new Date();

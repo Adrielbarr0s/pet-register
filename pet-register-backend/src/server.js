@@ -12,7 +12,8 @@ dotenv.config();
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] }));
+app.options('*', cors());
 app.use(express.json());
 
 app.get('/', (req, res) => res.status(200).json({ status: 'OK', message: 'API is running' }));
